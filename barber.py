@@ -6,7 +6,6 @@ import constants as const
 from constants import bot
 import proxy
 
-
 # Посылает дату и время записи человека 
 def get(message, service, date_user, time_user):
     size = int(len(date_user) - 1)
@@ -79,11 +78,10 @@ def get_del(message, service, date_user, time_user):
 
 #Выбор времени
 def times(message, keyb):
-    # TODO
-    #lenght = int(len(const.data_user[message.chat.id][6]) - 1):-6:-1
+    lenght = int(len(const.data_user[message.chat.id][6]) - 1)
 
     #Понедельник
-    if const.data_user[message.chat.id][6][int(len(const.data_user[message.chat.id][6]) - 1):-6:-1] == ')кинь':
+    if const.data_user[message.chat.id][6][lenght:-6:-1] == ')кинь':
         if len(const.arr_1) == 0:
             bot.send_message(message.chat.id, "Расписание на {} ещё не составлено".format(message.text))
             return
@@ -97,7 +95,7 @@ def times(message, keyb):
         print('Выбрана неделя: ' + const.data_user[message.chat.id][6])
         bot.send_message(message.chat.id, "Выберите время", reply_markup=keyb)
     #Вторник
-    elif const.data_user[message.chat.id][6][int(len(const.data_user[message.chat.id][6]) - 1):-6:-1] == ')кинр':
+    elif const.data_user[message.chat.id][6][lenght:-6:-1] == ')кинр':
         if len(const.arr_2) == 0:
             bot.send_message(message.chat.id, "Расписание на {} ещё не составлено".format(message.text))
             return
@@ -111,7 +109,7 @@ def times(message, keyb):
         print('Выбрана неделя: ' + const.data_user[message.chat.id][6])
         bot.send_message(message.chat.id, "Выберите время", reply_markup=keyb)
     #Среда
-    elif const.data_user[message.chat.id][6][int(len(const.data_user[message.chat.id][6]) - 1):-6:-1] == ')адер':
+    elif const.data_user[message.chat.id][6][lenght:-6:-1] == ')адер':
         if len(const.arr_3) == 0:
             bot.send_message(message.chat.id, "Расписание на {} ещё не составлено".format(message.text))
             return
@@ -125,7 +123,7 @@ def times(message, keyb):
         print('Выбрана неделя: ' + const.data_user[message.chat.id][6])
         bot.send_message(message.chat.id, "Выберите время", reply_markup=keyb)
     #Четверг
-    elif const.data_user[message.chat.id][6][int(len(const.data_user[message.chat.id][6]) - 1):-6:-1] == ')грев':
+    elif const.data_user[message.chat.id][6][lenght:-6:-1] == ')грев':
         if len(const.arr_4) == 0:
             bot.send_message(message.chat.id, "Расписание на {} ещё не составлено".format(message.text))
             return
@@ -139,7 +137,7 @@ def times(message, keyb):
         print('Выбрана неделя: ' + const.data_user[message.chat.id][6])
         bot.send_message(message.chat.id, "Выберите время", reply_markup=keyb)
     #Пятница
-    elif const.data_user[message.chat.id][6][int(len(const.data_user[message.chat.id][6]) - 1):-6:-1] == ')ацин':
+    elif const.data_user[message.chat.id][6][lenght:-6:-1] == ')ацин':
         if len(const.arr_5) == 0:
             bot.send_message(message.chat.id, "Расписание на {} ещё не составлено".format(message.text))
             return
@@ -153,7 +151,7 @@ def times(message, keyb):
         print('Выбрана неделя: ' + const.data_user[message.chat.id][6])
         bot.send_message(message.chat.id, "Выберите время", reply_markup=keyb)
     #Суббота
-    elif const.data_user[message.chat.id][6][int(len(const.data_user[message.chat.id][6]) - 1):-6:-1] == ')атоб':
+    elif const.data_user[message.chat.id][6][lenght:-6:-1] == ')атоб':
         if len(const.arr_6) == 0:
             bot.send_message(message.chat.id, "Расписание на {} ещё не составлено".format(message.text))
             return
@@ -167,7 +165,7 @@ def times(message, keyb):
         print('Выбрана неделя: ' + const.data_user[message.chat.id][6])
         bot.send_message(message.chat.id, "Выберите время", reply_markup=keyb)
     #Воскресенье
-    elif const.data_user[message.chat.id][6][int(len(const.data_user[message.chat.id][6]) - 1):-6:-1] == ')еьне':
+    elif const.data_user[message.chat.id][6][lenght:-6:-1] == ')еьне':
         if len(const.arr_7) == 0:
             bot.send_message(message.chat.id, "Расписание на {} ещё не составлено".format(message.text))
             return
@@ -249,6 +247,32 @@ def end(message, keyb):
                                                                                                 const.data_user[message.chat.id][6], 
                                                                                                 const.data_user[message.chat.id][7]), 
                                                                                                 reply_markup=keyb)
+                                                                                                
+# Контакты
+def contacts(message):
+        keyb = types.InlineKeyboardMarkup()
+
+        #Кнопки с ссылками на соц. сети
+        btn_vk = types.InlineKeyboardButton(text="Vk", url="https://vk.com/id95702362")
+        btn_inst = types.InlineKeyboardButton(text="Instagram", url="https://www.instagram.com/andrey_starzhevskiy/")
+
+        keyb.add(btn_vk)
+        keyb.add(btn_inst)
+
+        bot.send_message(message.chat.id, """Vk: https://vk.com/id95702362\nInstagram: https://www.instagram.com/andrey_starzhevskiy/""",
+                            reply_markup=keyb)
+
+# Информация о записи
+def info(message):
+    keyb_f = types.ReplyKeyboardMarkup(True, False)
+
+    keyb_f.row('Отменить запись', 'Информация о записи')
+    keyb_f.row('Контакты')
+
+    bot.send_message(message.chat.id, "Услуга: {0}\nДень: {1}\nВремя: {2}".format(const.data_user[message.chat.id][8], 
+                                                                                      const.data_user[message.chat.id][6], 
+                                                                                      const.data_user[message.chat.id][7]), 
+                                                                                      reply_markup=keyb_f)
 
 #Обработчик для создание расписания недель
 @bot.message_handler(commands=['edit_weeks'])
@@ -323,7 +347,6 @@ def start_handle(message):
         bot.send_message(message.from_user.id, 
                          "Привет!\nЯ бот который поможет тебе записаться на стрижку и.т.д", reply_markup=keyb)
     
-
 #Обработчик введённого текста
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
@@ -332,27 +355,10 @@ def handle_text(message):
     const.last_name = message.chat.last_name
 
     if message.text == 'Контакты':
-            keyb = types.InlineKeyboardMarkup()
+        contacts(message)
 
-            #Кнопки с ссылками на соц. сети
-            btn_vk = types.InlineKeyboardButton(text="Vk", url="https://vk.com/id95702362")
-            btn_inst = types.InlineKeyboardButton(text="Instagram", url="https://www.instagram.com/andrey_starzhevskiy/")
-
-            keyb.add(btn_vk)
-            keyb.add(btn_inst)
-
-            bot.send_message(message.chat.id, """Vk: https://vk.com/id95702362\nInstagram: https://www.instagram.com/andrey_starzhevskiy/""",
-                            reply_markup=keyb)
     elif message.text == 'Информация о записи' and const.data_user[message.chat.id][1]:
-        keyb_f = types.ReplyKeyboardMarkup(True, False)
-
-        keyb_f.row('Отменить запись', 'Информация о записи')
-        keyb_f.row('Контакты')
-
-        bot.send_message(message.chat.id, "Услуга: {0}\nДень: {1}\nВремя: {2}".format(const.data_user[message.chat.id][8], 
-                                                                                      const.data_user[message.chat.id][6], 
-                                                                                      const.data_user[message.chat.id][7]), 
-                                                                                      reply_markup=keyb_f)
+        info(message)
 
     elif message.text == 'Да, уверен' and const.data_user[message.chat.id][1]:
         keyb_a = types.ReplyKeyboardMarkup(True, False)
@@ -383,16 +389,17 @@ def handle_text(message):
         key_b.row('Нет')
 
         bot.send_message(message.chat.id, "Вы уверенны что хотите отменить запись", reply_markup=key_b)
+
         if const.data_user[message.chat.id][1] == False:
             keyb_a = types.ReplyKeyboardMarkup(True, False)
 
             keyb_a.row('Записаться')
             keyb_a.row('Контакты')
 
-
             bot.send_message(message.chat.id, "Вы не можите отменить запись т.к не записаны", reply_markup=keyb_a)
 
     elif const.data_user[message.chat.id][1] == False:
+
         keyb = types.ReplyKeyboardMarkup(True, False)
 
         if message.text == 'Записаться':
@@ -410,7 +417,9 @@ def handle_text(message):
             bot.send_message(message.chat.id, "Пожалуйста, выберите услугу", reply_markup=keyb)
 
         elif message.text == 'Стрижка' or message.text == 'Борода' or message.text == 'Стрижка + Борода':
+
             const.data_user[message.chat.id][2] = True
+
             if const.data_user[message.chat.id][4] != True:
                 keyb.row(const.week_arr[0], const.week_arr[1])
                 keyb.row(const.week_arr[2], const.week_arr[3])
@@ -441,6 +450,7 @@ def handle_text(message):
                 bot.send_message(message.chat.id, "Пожалуйста, выберите услугу", reply_markup=keyb)
             elif const.data_user[message.chat.id][3]:
                 const.data_user[message.chat.id][2] = True
+
                 if const.data_user[message.chat.id][5] == False:
                     keyb.row(const.week_arr[0], const.week_arr[1])
                     keyb.row(const.week_arr[2], const.week_arr[3])
