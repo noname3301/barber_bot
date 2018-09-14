@@ -17,12 +17,12 @@ first_name = ""
 last_name = ""
 
 #Токен бота
-token = "510189656:AAHqXOTqovgy8nafT88BsjmDEWt6vRlf_2o"
+token = ""
 
 #Объявление бота
 bot = telebot.TeleBot(token)
 
-#id Главного пользователя(изменить!) 
+#id Главного пользователя(изменить!)
 id = 427508080 #427508080 #428281929
 
 #Недели для записи
